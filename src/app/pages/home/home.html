@@ -1,1 +1,273 @@
-<p>home works!</p>
+<!-- HERO -->
+<section class="relative overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-100">
+  <!-- Animated blobs -->
+  <div class="pointer-events-none absolute -top-28 -right-28 w-[28rem] h-[28rem] rounded-full bg-blue-200/30 blur-3xl anim-blob"></div>
+  <div class="pointer-events-none absolute top-1/2 -left-32 w-[26rem] h-[26rem] rounded-full bg-blue-300/20 blur-3xl anim-blob2"></div>
+
+  <div class="relative max-w-7xl mx-auto px-4 py-24 grid lg:grid-cols-2 gap-14 items-center">
+    <!-- Text -->
+    <div class="reveal">
+      <span
+        class="inline-flex items-center gap-2 mb-5 px-4 py-1.5 rounded-full bg-blue-100 text-blue-700 text-sm font-medium"
+      >
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
+        </svg>
+        Assistant médical intelligent (organisation, pas diagnostic)
+      </span>
+
+      <h1 class="text-4xl md:text-5xl font-extrabold text-gray-900 leading-tight">
+        Gérez votre santé
+        <span class="text-blue-600">en toute sérénité</span>
+      </h1>
+
+      <p class="mt-6 text-lg text-gray-600 max-w-xl leading-relaxed">
+        MediVault+ centralise votre dossier médical, organise vos médicaments,
+        vous rappelle vos prises et déclenche des alertes (ex: stock faible),
+        avec un chatbot qui vous guide étape par étape.
+      </p>
+
+      <!-- Highlights -->
+      <div class="mt-7 grid sm:grid-cols-2 gap-3 max-w-xl">
+        <div class="flex items-start gap-3 bg-white/70 border border-gray-200 rounded-xl p-4">
+          <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l5 5v13a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Dossier médical</p>
+            <p class="text-sm text-gray-600">Upload PDF/images + tags + recherche.</p>
+          </div>
+        </div>
+
+        <div class="flex items-start gap-3 bg-white/70 border border-gray-200 rounded-xl p-4">
+          <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 15.5l7-7M7 17a4.95 4.95 0 007 0l3-3a4.95 4.95 0 10-7-7l-3 3a4.95 4.95 0 000 7z" />
+            </svg>
+          </div>
+          <div>
+            <p class="font-semibold text-gray-800">Médicaments & stock</p>
+            <p class="text-sm text-gray-600">Alertes “il reste 1 comprimé”.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- CTA -->
+      <div class="mt-10 flex flex-wrap gap-4">
+        <a
+          routerLink="/dashboard"
+          class="inline-flex items-center gap-2 px-7 py-3 bg-blue-600 text-white rounded-xl
+                 hover:bg-blue-700 transition shadow-lg hover:-translate-y-0.5"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M5 12h14M12 5l7 7-7 7" />
+          </svg>
+          Commencer
+        </a>
+
+        <a
+          routerLink="/medical-records"
+          class="inline-flex items-center gap-2 px-7 py-3 bg-white border border-gray-300
+                 rounded-xl text-gray-700 hover:bg-gray-100 transition hover:-translate-y-0.5"
+        >
+          <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l5 5v13a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" />
+          </svg>
+          Mon dossier médical
+        </a>
+      </div>
+
+      <!-- Mini stats -->
+      <div class="mt-10 flex flex-wrap gap-6 text-sm text-gray-600">
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-green-500"></span>
+          Rappels personnalisés
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-blue-500"></span>
+          Données structurées & historisées
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="w-2 h-2 rounded-full bg-purple-500"></span>
+          Chatbot guidé (actions UI)
+        </div>
+      </div>
+    </div>
+
+    <!-- Visual (dashboard mock) -->
+    <div class="hidden lg:flex justify-center reveal">
+      <div class="relative w-[26rem] bg-white rounded-3xl shadow-xl border border-gray-200 p-6 anim-float">
+        <div class="flex items-center justify-between">
+          <p class="font-semibold text-gray-800">Aperçu d’aujourd’hui</p>
+          <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Live</span>
+        </div>
+
+        <div class="mt-5 grid grid-cols-2 gap-4">
+          <div class="rounded-2xl border border-gray-200 p-4">
+            <p class="text-xs text-gray-500">Prochaine prise</p>
+            <p class="mt-1 font-semibold text-gray-900">08:00</p>
+            <p class="text-sm text-gray-600">Metformine</p>
+          </div>
+
+          <div class="rounded-2xl border border-gray-200 p-4">
+            <p class="text-xs text-gray-500">Stock faible</p>
+            <p class="mt-1 font-semibold text-gray-900">1 comprimé</p>
+            <p class="text-sm text-red-600">Doliprane 500mg</p>
+          </div>
+        </div>
+
+        <div class="mt-4 rounded-2xl bg-gray-50 border border-gray-200 p-4">
+          <div class="flex items-start gap-3">
+            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
+              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+              </svg>
+            </div>
+            <div>
+              <p class="text-sm font-semibold text-gray-800">Assistant</p>
+              <p class="text-sm text-gray-600">“Je peux programmer vos rappels ou vous aider à uploader une ordonnance.”</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-5 text-xs text-gray-500">
+          Santé • Organisation • Intelligence
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="py-24 bg-white">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="reveal">
+      <h2 class="text-3xl font-bold text-center text-gray-900 mb-4">
+        Une solution complète, centrée patient
+      </h2>
+      <p class="text-center text-gray-600 max-w-2xl mx-auto mb-14">
+        Un seul endroit pour vos documents, médicaments, rappels, et alertes.
+        L’assistant intelligent vous aide à remplir et à organiser rapidement.
+      </p>
+    </div>
+
+    <div class="grid sm:grid-cols-2 lg:grid-cols-4 gap-8">
+      <!-- Card -->
+      <div class="reveal group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M7 3h7l5 5v13a1 1 0 01-1 1H7a1 1 0 01-1-1V4a1 1 0 011-1z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-2">Dossier médical</h3>
+        <p class="text-sm text-gray-600">Upload + tags + consultation rapide de vos documents.</p>
+      </div>
+
+      <div class="reveal group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-green-100 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M8.5 15.5l7-7M7 17a4.95 4.95 0 007 0l3-3a4.95 4.95 0 10-7-7l-3 3a4.95 4.95 0 000 7z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-2">Médicaments</h3>
+        <p class="text-sm text-gray-600">Suivi posologie + historique + stock en temps réel.</p>
+      </div>
+
+      <div class="reveal group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-yellow-100 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-yellow-700" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 6v6l4 2" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M12 2a10 10 0 100 20 10 10 0 000-20z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-2">Rappels intelligents</h3>
+        <p class="text-sm text-gray-600">Notifications in-app (et PWA en bonus si tu veux).</p>
+      </div>
+
+      <div class="reveal group bg-white border border-gray-200 rounded-2xl p-6 hover:shadow-xl transition hover:-translate-y-1">
+        <div class="w-12 h-12 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
+          <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
+          </svg>
+        </div>
+        <h3 class="font-semibold text-gray-800 mb-2">Chatbot médical</h3>
+        <p class="text-sm text-gray-600">Guide + raccourcis + actions UI (pré-remplissage formulaires).</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="py-20 bg-gray-50">
+  <div class="max-w-7xl mx-auto px-4">
+    <div class="reveal text-center mb-12">
+      <h2 class="text-3xl font-bold text-gray-900">Comment ça marche</h2>
+      <p class="mt-3 text-gray-600">3 étapes simples pour être organisé.</p>
+    </div>
+
+    <div class="grid md:grid-cols-3 gap-8">
+      <div class="reveal bg-white border border-gray-200 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-xl bg-blue-100 flex items-center justify-center mb-4">
+          <span class="font-bold text-blue-700">1</span>
+        </div>
+        <h3 class="font-semibold text-gray-900">Uploadez vos documents</h3>
+        <p class="mt-2 text-sm text-gray-600">Ordonnances, analyses, radios… avec tags et date.</p>
+      </div>
+
+      <div class="reveal bg-white border border-gray-200 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-xl bg-green-100 flex items-center justify-center mb-4">
+          <span class="font-bold text-green-700">2</span>
+        </div>
+        <h3 class="font-semibold text-gray-900">Ajoutez vos médicaments</h3>
+        <p class="mt-2 text-sm text-gray-600">Posologie + horaires + stock + seuil alerte.</p>
+      </div>
+
+      <div class="reveal bg-white border border-gray-200 rounded-2xl p-6">
+        <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center mb-4">
+          <span class="font-bold text-purple-700">3</span>
+        </div>
+        <h3 class="font-semibold text-gray-900">Recevez des rappels</h3>
+        <p class="mt-2 text-sm text-gray-600">Et laissez le chatbot vous guider en 1 clic.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="py-16 bg-gradient-to-r from-blue-600 to-blue-700">
+  <div class="max-w-7xl mx-auto px-4 text-center reveal">
+    <h2 class="text-3xl font-bold text-white">Prêt(e) à organiser votre santé ?</h2>
+    <p class="mt-3 text-blue-100">Commencez par uploader un document ou ajouter votre premier médicament.</p>
+
+    <div class="mt-8 flex flex-wrap justify-center gap-4">
+      <a routerLink="/medical-records"
+         class="px-7 py-3 bg-white text-blue-700 rounded-xl font-semibold hover:bg-blue-50 transition hover:-translate-y-0.5">
+        Uploader un document
+      </a>
+      <a routerLink="/medications"
+         class="px-7 py-3 bg-blue-900/20 text-white rounded-xl border border-white/20 hover:bg-blue-900/30 transition hover:-translate-y-0.5">
+        Ajouter un médicament
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- DISCLAIMER -->
+<section class="bg-blue-50 py-12">
+  <div class="max-w-5xl mx-auto px-4 text-center reveal">
+    <div class="inline-flex items-center gap-2 mb-3 text-blue-700 font-medium">
+      <svg class="w-5 h-5" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z" />
+      </svg>
+      Sécurité & responsabilité
+    </div>
+
+    <p class="text-sm text-gray-600 leading-relaxed">
+      MediVault+ est un outil d’organisation médicale.
+      Il ne remplace pas un avis médical professionnel.
+      En cas d’urgence, contactez immédiatement les services médicaux.
+    </p>
+  </div>
+</section>

@@ -1,0 +1,103 @@
+<div class="max-w-5xl mx-auto p-6">
+
+  <!-- Header -->
+  <div class="mb-6">
+    <h1 class="text-2xl font-semibold text-gray-800">
+      Medical Records
+    </h1>
+    <p class="text-gray-500 text-sm">
+      Manage and review your uploaded medical documents
+    </p>
+  </div>
+
+  <!-- Empty State -->
+  @if (medicalRecords.length === 0) {
+    <div
+      class="bg-gray-50 border border-dashed rounded-xl p-10 text-center text-gray-500">
+      No medical records found.
+    </div>
+  }
+
+  <!-- Records List -->
+  @for (record of medicalRecords; track record.id) {
+    <div
+      class="flex items-center justify-between bg-white rounded-xl shadow-sm p-4 mb-4 border">
+
+      <!-- Left: Record Info -->
+      <div>
+        <h3 class="font-medium text-gray-800">
+          {{ record.filename }}
+        </h3>
+
+        <p class="text-sm text-gray-500">
+          {{ record.date }}
+        </p>
+
+        @if (record.tags?.length) {
+          <div class="flex gap-2 mt-2">
+            @for (tag of record.tags; track tag) {
+              <span
+                class="px-2 py-1 text-xs rounded-full bg-blue-100 text-blue-700">
+                {{ tag }}
+              </span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Right: Actions -->
+      <div class="flex gap-3">
+        <a
+          [href]="record.url"
+          target="_blank"
+          class="px-4 py-2 text-sm rounded-lg border border-gray-300 hover:bg-gray-100">
+          View
+        </a>
+
+        <button
+          (click)="initiateDelete(record.id)"
+          class="px-4 py-2 text-sm rounded-lg bg-red-600 text-white hover:bg-red-700">
+          Delete
+        </button>
+      </div>
+
+    </div>
+  }
+</div>
+
+<!-- ========================= -->
+<!-- Delete Confirmation Modal -->
+<!-- ========================= -->
+@if (confirmationPending) {
+  <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">
+        Confirm deletion
+      </h2>
+
+      <p class="text-sm text-gray-600 mb-6">
+        Are you sure you want to delete this medical record?
+        This action cannot be undone.
+      </p>
+
+      <!-- Actions -->
+      <div class="flex justify-end gap-3">
+        <button
+          (click)="closeDelete()"
+          class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+          Cancel
+        </button>
+
+        <button
+          (click)="confirmeDelete()"
+          class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700">
+          Confirm Delete
+        </button>
+      </div>
+
+    </div>
+
+  </div>
+}

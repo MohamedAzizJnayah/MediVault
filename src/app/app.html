@@ -1,1 +1,21 @@
-<app-navbar></app-navbar>
+<!-- Global App Layout -->
+<div class="min-h-screen bg-gray-50 flex flex-col">
+
+  <!-- Navbar -->
+  <app-navbar></app-navbar>
+
+  <!-- Main Content -->
+  <main class="flex-1 pt-6">
+    <div class="max-w-7xl mx-auto px-4">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <!-- Footer (optionnel, prêt pour plus tard) -->
+  <footer class="border-t bg-white text-sm text-gray-500 py-4">
+    <div class="max-w-7xl mx-auto px-4 text-center">
+      © 2025 MediVault — Secure Medical Records
+    </div>
+  </footer>
+
+</div>

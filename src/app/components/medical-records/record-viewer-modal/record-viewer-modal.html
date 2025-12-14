@@ -1,0 +1,63 @@
+<div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+
+  <div class="bg-white rounded-2xl shadow-xl w-full max-w-4xl p-6 relative">
+
+    <!-- Header -->
+    <div class="flex justify-between items-center mb-4">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-800">
+          {{ record.filename }}
+        </h2>
+        <p class="text-sm text-gray-500">
+          {{ record.date }}
+        </p>
+      </div>
+
+      <button
+        (click)="closeModal()"
+        class="text-gray-400 hover:text-gray-600 text-2xl leading-none">
+        &times;
+      </button>
+    </div>
+
+    <!-- Content -->
+    <div class="border rounded-xl p-4 bg-gray-50 max-h-[70vh] overflow-auto">
+
+      @if (record.url?.endsWith('.pdf')) {
+        <!-- PDF Viewer -->
+        <iframe
+          [src]="record.url"
+          class="w-full h-[60vh] rounded-lg"
+          frameborder="0">
+        </iframe>
+      }
+      @else {
+        <!-- Image Viewer -->
+        <img
+          [src]="record.url"
+          alt="Medical Record"
+          class="max-w-full mx-auto rounded-lg shadow-sm"
+        />
+      }
+
+    </div>
+
+    <!-- Footer -->
+    <div class="flex justify-end gap-3 mt-4">
+      <a
+        [href]="record.url"
+        target="_blank"
+        class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+        Open in new tab
+      </a>
+
+      <button
+        (click)="closeModal()"
+        class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+        Close
+      </button>
+    </div>
+
+  </div>
+
+</div>
