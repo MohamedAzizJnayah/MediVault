@@ -1,0 +1,97 @@
+<div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+  <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-6">
+
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold text-gray-800">Add medication</h2>
+      <button (click)="onClose()" class="text-2xl text-gray-400 hover:text-gray-700">&times;</button>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <input formControlName="name"
+               class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+               placeholder="e.g. Doliprane" />
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Dosage</label>
+          <input type="number" formControlName="dosage"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="500" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Unit</label>
+          <input formControlName="unit"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="mg / ml / comprimé" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Frequency / day</label>
+          <input type="number" formControlName="frequencyPerDay"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="3" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Times (optional)</label>
+          <input formControlName="timesText"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="08:00, 14:00, 20:00" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Stock</label>
+          <input type="number" formControlName="stock"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="12" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Alert threshold</label>
+          <input type="number" formControlName="lowStockThreshold"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="1" />
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Start date</label>
+          <input type="date" formControlName="startDate"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">End date (optional)</label>
+          <input type="date" formControlName="endDate"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+      </div>
+
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+        <textarea formControlName="notes" rows="2"
+                  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  placeholder="After meals..."></textarea>
+      </div>
+
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" (click)="onClose()"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+          Cancel
+        </button>
+
+        <button type="submit" [disabled]="form.invalid"
+                class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed">
+          Add
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

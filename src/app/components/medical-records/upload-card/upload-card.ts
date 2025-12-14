@@ -44,7 +44,7 @@ export class UploadCard {
     formData.append('date', new Date().toISOString().split('T')[0]);
     formData.append('file', this.selectedFile);
 
-    this.medicalService.uploadMedicalRecord(formData).subscribe({
+    this.medicalService.createMedicalRecord(formData).subscribe({
       next: () => console.log('Upload réussi'),
       error: err => console.error(err),
     });

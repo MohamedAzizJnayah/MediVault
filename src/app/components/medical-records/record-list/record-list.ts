@@ -3,12 +3,12 @@ import { CommonModule } from '@angular/common';
 
 import { MedicalRecordService } from '../../../services/medical-record.service';
 import { MedicalRecord } from '../../../models/medical-record.model';
-import { RecordViewerModal } from "../record-viewer-modal/record-viewer-modal";
+
 
 @Component({
   selector: 'app-record-list',
   standalone: true,
-  imports: [CommonModule, RecordViewerModal],
+  imports: [CommonModule],
   templateUrl: './record-list.html',
   styleUrl: './record-list.css',
 })

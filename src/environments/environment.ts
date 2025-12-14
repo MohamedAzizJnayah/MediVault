@@ -1,10 +1,10 @@
 export const environment = {
   production: true,
 
-  apiUrl: 'https://api.medicloud.com/api',
+  apiUrl: 'http://localhost:3000',
 
   endpoints: {
-    medicalRecords: '/medical-records',
+    medicalRecords: '/medicalRecords',
     medications: '/medications',
     reminders: '/reminders',
     chat: '/chat'

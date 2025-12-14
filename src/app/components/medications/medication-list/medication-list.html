@@ -1,0 +1,144 @@
+<div class="max-w-5xl mx-auto p-6">
+
+  <div class="flex items-center justify-between mb-6">
+    <div>
+      <h1 class="text-2xl font-semibold text-gray-800">Medications</h1>
+      <p class="text-sm text-gray-500">Add, edit and track your medicines.</p>
+    </div>
+
+    <button (click)="openAdd()"
+            class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700">
+      + Add medication
+    </button>
+  </div>
+
+  @if (errorMessage) {
+    <div class="mb-4 rounded-xl border border-red-200 bg-red-50 p-4 text-red-700">
+      {{ errorMessage }}
+    </div>
+  }
+
+  @if (loading) {
+    <div class="rounded-xl border bg-white p-6 text-gray-600">
+      Loading medications...
+    </div>
+  } @else {
+
+    @if (medications.length === 0) {
+      <div class="rounded-xl border border-dashed bg-gray-50 p-10 text-center text-gray-500">
+        No medications found.
+      </div>
+    } @else {
+
+      <div class="space-y-4">
+        @for (m of medications; track m.id) {
+          <div class="bg-white rounded-2xl border shadow-sm p-5 flex items-start justify-between gap-4">
+
+            <div class="min-w-0">
+              <div class="flex items-center gap-3">
+                <h3 class="font-semibold text-gray-800 truncate">{{ m.name }}</h3>
+
+                @if (m.stock <= 0) {
+                  <span class="px-2 py-1 text-xs rounded-full bg-red-50 text-red-700 border border-red-200">
+                    Out of stock
+                  </span>
+                } @else if (isLowStock(m)) {
+                  <span class="px-2 py-1 text-xs rounded-full bg-amber-50 text-amber-700 border border-amber-200">
+                    Low stock
+                  </span>
+                } @else {
+                  <span class="px-2 py-1 text-xs rounded-full bg-green-50 text-green-700 border border-green-200">
+                    In stock
+                  </span>
+                }
+              </div>
+
+              <p class="text-sm text-gray-500 mt-1">
+                Dose: <span class="font-medium text-gray-700">{{ m.dosage }} {{ m.unit }}</span>
+                <span class="text-gray-400"> • </span>
+                <span>{{ m.frequencyPerDay }} / day</span>
+              </p>
+
+              @if (m.times?.length) {
+                <p class="text-sm text-gray-500 mt-1">
+                  Times: <span class="font-medium text-gray-700">{{ (m.times ?? []).join(' , ') }}</span>
+                </p>
+              }
+
+              <p class="text-sm text-gray-500 mt-1">
+                Stock: <span class="font-medium text-gray-700">{{ m.stock }}</span>
+                <span class="text-gray-400"> • Alert ≤ </span>
+                <span class="font-medium text-gray-700">{{ m.lowStockThreshold }}</span>
+              </p>
+
+              <p class="text-sm text-gray-500 mt-1">
+                Start: <span class="font-medium text-gray-700">{{ m.startDate }}</span>
+                @if (m.endDate) {
+                  <span class="text-gray-400"> • End: </span>
+                  <span class="font-medium text-gray-700">{{ m.endDate }}</span>
+                }
+              </p>
+
+              @if (m.notes) {
+                <p class="text-sm text-gray-500 mt-2">{{ m.notes }}</p>
+              }
+            </div>
+
+            <div class="flex items-center gap-2 shrink-0">
+              <button (click)="openEdit(m)"
+                      class="px-3 py-2 rounded-lg border hover:bg-gray-50 text-sm">
+                Edit
+              </button>
+
+              <button (click)="openDeleteModal(m.id)"
+                      class="px-3 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 text-sm">
+                Delete
+              </button>
+            </div>
+
+          </div>
+        }
+      </div>
+    }
+  }
+</div>
+
+<!-- Add modal -->
+@if (addModalOpen) {
+  <app-add-medication
+    (close)="closeAdd()"
+    (created)="handleCreated($event)">
+  </app-add-medication>
+}
+
+<!-- Edit modal -->
+@if (editModalOpen && selectedToEdit) {
+  <app-edit-medication
+    [medication]="selectedToEdit"
+    (close)="closeEdit()"
+    (updated)="handleUpdated($event)">
+  </app-edit-medication>
+}
+
+<!-- Delete modal -->
+@if (deleteModalOpen) {
+  <div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+    <div class="bg-white rounded-2xl shadow-xl w-full max-w-md p-6">
+      <h2 class="text-lg font-semibold text-gray-800 mb-2">Delete medication</h2>
+      <p class="text-sm text-gray-600 mb-4">Are you sure? This action cannot be undone.</p>
+
+      <div class="flex justify-end gap-3">
+        <button (click)="closeDeleteModal()"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+          Cancel
+        </button>
+
+        <button (click)="confirmDelete()"
+                [disabled]="isDeleting"
+                class="px-4 py-2 rounded-lg bg-red-600 text-white hover:bg-red-700 disabled:bg-gray-300 disabled:cursor-not-allowed">
+          @if (isDeleting) { Deleting... } @else { Delete }
+        </button>
+      </div>
+    </div>
+  </div>
+}

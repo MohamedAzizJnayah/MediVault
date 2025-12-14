@@ -1,0 +1,132 @@
+<div class="fixed inset-0 bg-black/40 flex items-center justify-center z-50">
+  <div class="w-full max-w-xl bg-white rounded-2xl shadow-xl p-6">
+
+    <!-- Header -->
+    <div class="flex items-center justify-between mb-4">
+      <div>
+        <h2 class="text-lg font-semibold text-gray-800">Edit medication</h2>
+        <p class="text-sm text-gray-500">Update dose, schedule, and stock safely.</p>
+      </div>
+
+      <button (click)="onClose()"
+              class="text-2xl text-gray-400 hover:text-gray-700 leading-none">
+        &times;
+      </button>
+    </div>
+
+    <!-- Form -->
+    <form [formGroup]="form" (ngSubmit)="submit()" class="space-y-4">
+
+      <!-- Name -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+        <input formControlName="name"
+               class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+               placeholder="e.g. Doliprane" />
+        @if (form.get('name')?.touched && form.get('name')?.invalid) {
+          <p class="text-sm text-red-500 mt-1">Name is required</p>
+        }
+      </div>
+
+      <!-- Dosage + Unit -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Dosage</label>
+          <input type="number" formControlName="dosage"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="500" />
+          @if (form.get('dosage')?.touched && form.get('dosage')?.invalid) {
+            <p class="text-sm text-red-500 mt-1">Enter a valid dosage</p>
+          }
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Unit</label>
+          <input formControlName="unit"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="mg / ml / comprimé" />
+        </div>
+      </div>
+
+      <!-- Frequency + Times -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Frequency / day</label>
+          <input type="number" formControlName="frequencyPerDay"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="3" />
+          @if (form.get('frequencyPerDay')?.touched && form.get('frequencyPerDay')?.invalid) {
+            <p class="text-sm text-red-500 mt-1">Enter a valid frequency</p>
+          }
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Times (optional)</label>
+          <input formControlName="timesText"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="08:00, 14:00, 20:00" />
+          <p class="text-xs text-gray-500 mt-1">
+            Separate times with commas.
+          </p>
+        </div>
+      </div>
+
+      <!-- Stock + Threshold -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Stock</label>
+          <input type="number" formControlName="stock"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="12" />
+          @if (form.get('stock')?.touched && form.get('stock')?.invalid) {
+            <p class="text-sm text-red-500 mt-1">Stock must be ≥ 0</p>
+          }
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Low stock alert ≤</label>
+          <input type="number" formControlName="lowStockThreshold"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                 placeholder="1" />
+        </div>
+      </div>
+
+      <!-- Start/End dates -->
+      <div class="grid grid-cols-2 gap-4">
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">Start date</label>
+          <input type="date" formControlName="startDate"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+
+        <div>
+          <label class="block text-sm font-medium text-gray-700 mb-1">End date (optional)</label>
+          <input type="date" formControlName="endDate"
+                 class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none" />
+        </div>
+      </div>
+
+      <!-- Notes -->
+      <div>
+        <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+        <textarea formControlName="notes" rows="2"
+                  class="w-full px-4 py-2 border rounded-lg focus:ring-2 focus:ring-blue-500 focus:outline-none"
+                  placeholder="After meals..."></textarea>
+      </div>
+
+      <!-- Actions -->
+      <div class="flex justify-end gap-3 pt-2">
+        <button type="button" (click)="onClose()"
+                class="px-4 py-2 rounded-lg border border-gray-300 hover:bg-gray-100">
+          Cancel
+        </button>
+
+        <button type="submit" [disabled]="form.invalid"
+                class="px-4 py-2 rounded-lg bg-blue-600 text-white hover:bg-blue-700 disabled:bg-gray-300 disabled:cursor-not-allowed">
+          Save changes
+        </button>
+      </div>
+
+    </form>
+  </div>
+</div>

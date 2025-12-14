@@ -1,4 +1,5 @@
 export interface Medication {
+
   id: string;
 
   name: string;              // Nom du médicament (ex: Doliprane)
