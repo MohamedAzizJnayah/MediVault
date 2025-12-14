@@ -1,0 +1,17 @@
+.nav-link {
+  @apply inline-flex items-center gap-2 px-3 py-2 rounded-xl text-sm font-medium
+         text-gray-600 hover:text-blue-700 hover:bg-blue-50
+         transition ring-1 ring-transparent;
+}
+
+.nav-icon {
+  @apply w-5 h-5;
+}
+
+.active-link {
+  @apply text-blue-700 bg-blue-50 ring-1 ring-blue-200/60;
+}
+
+.mobile-link {
+  @apply block px-4 py-3 text-sm font-medium text-gray-700 hover:bg-gray-50 transition;
+}
