@@ -3,11 +3,12 @@ import { ReactiveFormsModule, FormGroup, FormControl, Validators } from '@angula
 import { MedicalRecordService } from '../../../services/medical-record.service';
 import { CommonModule } from '@angular/common';
 import { MedicalRecord } from '../../../models/medical-record.model';
+import { AutoFocusDirective } from '../../../directives/auto-focus-directive';
 
 @Component({
   selector: 'app-upload-card',
   standalone: true,
-  imports: [ReactiveFormsModule, CommonModule],
+  imports: [ReactiveFormsModule, CommonModule,AutoFocusDirective],
   templateUrl: './upload-card.html',
   styleUrl: './upload-card.css',
 })

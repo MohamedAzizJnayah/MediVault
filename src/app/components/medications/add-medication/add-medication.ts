@@ -2,10 +2,11 @@ import { CommonModule } from '@angular/common';
 import { Component, EventEmitter, Output } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Medication } from '../../../models/medication.model';
+import { AutoFocusDirective } from '../../../directives/auto-focus-directive';
 
 @Component({
   selector: 'app-add-medication',
-   imports: [CommonModule, ReactiveFormsModule],
+   imports: [CommonModule, ReactiveFormsModule,AutoFocusDirective],
   templateUrl: './add-medication.html',
   styleUrl: './add-medication.css',
 })
