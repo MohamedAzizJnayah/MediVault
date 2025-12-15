@@ -1,0 +1,64 @@
+<div class="bg-white rounded-2xl border shadow-sm p-5">
+
+  <div class="mb-4">
+    <h2 class="text-lg font-semibold text-gray-800">Today timeline</h2>
+    <p class="text-sm text-gray-500">Your planned doses for today.</p>
+  </div>
+
+  @if (error) {
+    <div class="mb-4 rounded-xl border border-red-200 bg-red-50 p-3 text-red-700">
+      {{ error }}
+    </div>
+  }
+
+  @if (loading) {
+    <div class="rounded-xl border bg-gray-50 p-4 text-gray-600">Loading...</div>
+  } @else {
+
+    @if (events.length === 0) {
+      <div class="rounded-xl border border-dashed bg-gray-50 p-8 text-center text-gray-500">
+        No doses scheduled for today.
+      </div>
+    } @else {
+
+      <div class="space-y-3">
+        @for (e of events; track e.medicationId + '-' + e.time) {
+          <div class="flex items-start gap-3">
+
+            <!-- Dot -->
+            <div class="mt-2 w-3 h-3 rounded-full"
+                 [class.bg-emerald-500]="e.status === 'upcoming'"
+                 [class.bg-gray-300]="e.status === 'past'">
+            </div>
+
+            <!-- Card -->
+            <div class="flex-1 rounded-xl border p-4"
+                 [class.bg-emerald-50]="e.status === 'upcoming'"
+                 [class.border-emerald-200]="e.status === 'upcoming'"
+                 [class.bg-gray-50]="e.status === 'past'"
+                 [class.border-gray-200]="e.status === 'past'">
+
+              <div class="flex items-center justify-between">
+                <div class="font-semibold text-gray-800">{{ e.name }}</div>
+                <div class="text-sm font-medium text-gray-700">{{ e.time }}</div>
+              </div>
+
+              <div class="text-sm text-gray-600 mt-1">
+                Dose: <span class="font-medium text-gray-700">{{ e.dosageText }}</span>
+              </div>
+
+              <div class="text-xs mt-2"
+                   [class.text-emerald-700]="e.status === 'upcoming'"
+                   [class.text-gray-500]="e.status === 'past'">
+                @if (e.status === 'upcoming') { Upcoming } @else { Past }
+              </div>
+
+            </div>
+
+          </div>
+        }
+      </div>
+
+    }
+  }
+</div>
