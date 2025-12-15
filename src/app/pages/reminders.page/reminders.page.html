@@ -19,10 +19,13 @@
 
       <!-- Schedule editor -->
       <div class="lg:col-span-2">
-        <app-schedual-editor-component></app-schedual-editor-component>
+        <app-schedual-editor-component
+          (saved)="onScheduleSaved()">
+        </app-schedual-editor-component>
+      </div>
       </div>
 
     </div>
 
-  </div>
 </div>
+

@@ -15,12 +15,12 @@
 
     <!-- Upload Section -->
     <div class="lg:col-span-1">
-      <app-upload-card></app-upload-card>
+      <app-upload-card (uploaded)="onUploaded($event)"></app-upload-card>
     </div>
 
     <!-- Records List Section -->
     <div class="lg:col-span-2">
-      <app-record-list></app-record-list>
+      <app-record-list ></app-record-list>
     </div>
 
   </div>

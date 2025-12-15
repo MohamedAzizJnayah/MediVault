@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import {
   FormArray,
@@ -36,6 +36,8 @@ export class ScheduleEditorComponent implements OnInit {
     endDate: new FormControl<string>(''),
     times: new FormArray<FormControl<string>>([]),
   });
+
+  @Output() saved = new EventEmitter<void>();
 
   ngOnInit(): void {
     this.loadMedications();
@@ -160,6 +162,7 @@ export class ScheduleEditorComponent implements OnInit {
     this.medicationService.updateMedication(updated.id, updated).subscribe({
       next: (saved) => {
         // update local list
+         this.saved.emit();
         this.medications = this.medications.map(m => (m.id === saved.id ? saved : m));
         this.selectedMedication = saved;
         this.message = 'Schedule updated successfully ✅';

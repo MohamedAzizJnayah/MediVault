@@ -18,6 +18,7 @@ export class RecordListComponent implements OnInit {
   selectedRecord: MedicalRecord | null = null;
   confirmationPending = false;
   recordToDeleteId: string | null = null;
+ 
 
   constructor(
     private medicalRecordService: MedicalRecordService,
@@ -87,6 +88,10 @@ export class RecordListComponent implements OnInit {
 
 closeViewer(): void {
   this.selectedRecord = null;
+}
+
+addRecord(record: MedicalRecord): void {
+  this.medicalRecords = [record, ...this.medicalRecords];
 }
 
 
