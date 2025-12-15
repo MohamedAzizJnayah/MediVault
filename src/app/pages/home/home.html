@@ -100,41 +100,56 @@
     <div class="hidden lg:flex justify-center reveal">
       <div class="relative w-[26rem] bg-white rounded-3xl shadow-xl border border-gray-200 p-6 anim-float">
         <div class="flex items-center justify-between">
-          <p class="font-semibold text-gray-800">Aperçu d’aujourd’hui</p>
-          <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Live</span>
-        </div>
+  <p class="font-semibold text-gray-800">Aperçu d’aujourd’hui</p>
 
-        <div class="mt-5 grid grid-cols-2 gap-4">
-          <div class="rounded-2xl border border-gray-200 p-4">
-            <p class="text-xs text-gray-500">Prochaine prise</p>
-            <p class="mt-1 font-semibold text-gray-900">08:00</p>
-            <p class="text-sm text-gray-600">Metformine</p>
-          </div>
+  @if (!todayLoading && !todayError) {
+    <span class="text-xs px-2 py-1 rounded-full bg-blue-50 text-blue-700 border border-blue-100">Live</span>
+  } @else {
+    <span class="text-xs px-2 py-1 rounded-full bg-gray-50 text-gray-600 border border-gray-200">
+      @if (todayLoading) { Chargement… } @else { Offline }
+    </span>
+  }
+</div>
 
-          <div class="rounded-2xl border border-gray-200 p-4">
-            <p class="text-xs text-gray-500">Stock faible</p>
-            <p class="mt-1 font-semibold text-gray-900">1 comprimé</p>
-            <p class="text-sm text-red-600">Doliprane 500mg</p>
-          </div>
-        </div>
+@if (todayError) {
+  <div class="mt-4 rounded-2xl border border-red-200 bg-red-50 p-4 text-sm text-red-700">
+    {{ todayError }}
+  </div>
+} @else {
 
-        <div class="mt-4 rounded-2xl bg-gray-50 border border-gray-200 p-4">
-          <div class="flex items-start gap-3">
-            <div class="w-10 h-10 rounded-xl bg-purple-100 flex items-center justify-center">
-              <svg class="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M13 10V3L4 14h7v7l9-11h-7z" />
-              </svg>
-            </div>
-            <div>
-              <p class="text-sm font-semibold text-gray-800">Assistant</p>
-              <p class="text-sm text-gray-600">“Je peux programmer vos rappels ou vous aider à uploader une ordonnance.”</p>
-            </div>
-          </div>
-        </div>
+  <div class="mt-5 grid grid-cols-2 gap-4">
 
-        <div class="mt-5 text-xs text-gray-500">
-          Santé • Organisation • Intelligence
-        </div>
+    <!-- Next dose -->
+    <div class="rounded-2xl border border-gray-200 p-4">
+      <p class="text-xs text-gray-500">Prochaine prise</p>
+
+      @if (todayLoading) {
+        <div class="mt-2 h-6 w-20 rounded bg-gray-200 animate-pulse"></div>
+        <div class="mt-2 h-4 w-28 rounded bg-gray-200 animate-pulse"></div>
+      } @else {
+        <p class="mt-1 font-semibold text-gray-900">{{ nextDose.time }}</p>
+        <p class="text-sm text-gray-600">{{ nextDose.name }}</p>
+      }
+    </div>
+
+    <!-- Low stock -->
+    <div class="rounded-2xl border border-gray-200 p-4">
+      <p class="text-xs text-gray-500">Stock faible</p>
+
+      @if (todayLoading) {
+        <div class="mt-2 h-6 w-24 rounded bg-gray-200 animate-pulse"></div>
+        <div class="mt-2 h-4 w-40 rounded bg-gray-200 animate-pulse"></div>
+      } @else {
+        <p class="mt-1 font-semibold text-gray-900">{{ lowStock.quantityText }}</p>
+        <p class="text-sm" [class.text-red-600]="lowStock.count > 0" [class.text-gray-600]="lowStock.count === 0">
+          {{ lowStock.medicationText }}
+        </p>
+      }
+    </div>
+
+  </div>
+}
+
       </div>
     </div>
   </div>
