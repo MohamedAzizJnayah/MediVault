@@ -1,0 +1,179 @@
+<!-- ========= FLOATING BUTTON ========= -->
+<button
+  (click)="toggleChat()"
+  class="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center
+         rounded-full bg-gradient-to-br from-sky-600 to-cyan-600 text-white
+         shadow-xl shadow-cyan-500/30 hover:scale-105 active:scale-95
+         transition-transform duration-150 border border-white/20"
+  aria-label="Open MediVault assistant"
+>
+@if (!isOpen) {
+  <div class="relative">
+    <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+      <path d="M4 6.5A3.5 3.5 0 0 1 7.5 3h9A3.5 3.5 0 0 1 20 6.5v6A3.5 3.5 0 0 1 16.5 16H10l-4.2 3.2c-.5.4-1.3 0-1.3-.7V16.2A3.5 3.5 0 0 1 4 12.5v-6Z"
+            stroke="currentColor" stroke-width="1.8" stroke-linejoin="round"/>
+    </svg>
+    <span class="absolute -top-2 -right-2 text-[10px] px-1.5 py-0.5 rounded-full bg-white/90 text-sky-700 font-semibold border animate-pulse">
+      AI
+    </span>
+  </div>
+} @else {
+  <svg class="w-6 h-6" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+    <path d="M6 6l12 12M18 6L6 18"
+          stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+  </svg>
+}
+
+
+
+  <!-- small badge -->
+  <span class="absolute -top-1 -left-1 px-1.5 py-0.5 text-[10px] rounded-full bg-white/90 text-sky-700 font-semibold border">
+    AI
+  </span>
+</button>
+
+<!-- ========= CHAT PANEL ========= -->
+@if (isOpen) {
+  <div
+    class="fixed bottom-24 right-6 z-40 w-80 sm:w-96 max-h-[70vh]
+           rounded-3xl bg-white/95 dark:bg-slate-900/95
+           border border-slate-200/80 dark:border-slate-700/80
+           shadow-2xl shadow-cyan-500/20 backdrop-blur-md
+           flex flex-col overflow-hidden animate-[fadeInUp_0.2s_ease-out]"
+    role="dialog"
+    aria-label="MediVault assistant"
+  >
+
+    <!-- HEADER -->
+    <div class="px-4 py-3 bg-gradient-to-r from-sky-600 to-cyan-600 text-white">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-2">
+          <div class="h-8 w-8 rounded-full bg-white/15 flex items-center justify-center">
+            <span class="text-lg">✚</span>
+          </div>
+
+          <div class="text-sm">
+            <p class="font-semibold leading-tight">MediVault Assistant</p>
+            <div class="flex items-center gap-2">
+              <span class="inline-flex h-2 w-2 rounded-full bg-emerald-300"></span>
+              <p class="text-[11px] opacity-90">Medication • Records • Reminders</p>
+            </div>
+          </div>
+        </div>
+
+        <button
+          (click)="toggleChat()"
+          class="p-1 rounded-full hover:bg-white/10 transition"
+          aria-label="Close assistant"
+        >
+          ✖
+        </button>
+      </div>
+
+      <!-- Quick chips (optional) -->
+      <div class="mt-3 flex flex-wrap gap-2">
+        <button
+          type="button"
+          class="text-[11px] px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/20 transition"
+          (click)="prefill('Show low stock medications')"
+        >
+          Low stock
+        </button>
+        <button
+          type="button"
+          class="text-[11px] px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/20 transition"
+          (click)="prefill('What reminders do I have today?')"
+        >
+          Today reminders
+        </button>
+        <button
+          type="button"
+          class="text-[11px] px-2.5 py-1 rounded-full bg-white/15 hover:bg-white/20 transition"
+          (click)="prefill('Help me upload a medical record')"
+        >
+          Upload record
+        </button>
+      </div>
+    </div>
+
+    <!-- MESSAGES -->
+    <div
+      #scrollBox
+      class="flex-1 px-3 py-3 space-y-2 overflow-y-auto
+             bg-slate-50/70 dark:bg-slate-950/60"
+    >
+      @for (msg of messages; track $index) {
+
+        @if (msg.from === 'bot') {
+          <div class="flex items-start gap-2 max-w-[92%]">
+            <div class="mt-1 h-7 w-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm">
+              ✚
+            </div>
+
+            <div class="rounded-2xl bg-white dark:bg-slate-800 px-3 py-2 shadow-sm border border-slate-200/60 dark:border-slate-700/60">
+              <p class="text-xs text-slate-800 dark:text-slate-100 whitespace-pre-wrap">
+                {{ msg.text }}
+              </p>
+              <p class="mt-1 text-[10px] text-slate-400">{{ msg.time }}</p>
+            </div>
+          </div>
+        } @else {
+          <div class="flex justify-end max-w-[92%] ml-auto">
+            <div class="rounded-2xl bg-gradient-to-br from-sky-600 to-cyan-600 text-white px-3 py-2 shadow-sm">
+              <p class="text-xs whitespace-pre-wrap">{{ msg.text }}</p>
+              <p class="mt-1 text-[10px] text-white/70 text-right">{{ msg.time }}</p>
+            </div>
+          </div>
+        }
+
+      }
+
+      <!-- typing -->
+      @if (isLoading) {
+        <div class="flex items-start gap-2 max-w-[92%] mt-1">
+          <div class="mt-1 h-7 w-7 rounded-full bg-sky-600 text-white flex items-center justify-center text-sm">
+            ✚
+          </div>
+          <div class="rounded-2xl bg-white dark:bg-slate-800 px-3 py-2 shadow-sm border border-slate-200/60 dark:border-slate-700/60">
+            <div class="flex items-center gap-1">
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+              <span class="typing-dot"></span>
+            </div>
+            <p class="mt-1 text-[10px] text-slate-400">Analyzing…</p>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- INPUT -->
+    <form
+      (ngSubmit)="sendMessage()"
+      class="border-t border-slate-200 dark:border-slate-700 bg-white/90 dark:bg-slate-900/90 px-3 py-2 flex items-center gap-2"
+    >
+      <input
+        #chatInput
+        type="text"
+        [(ngModel)]="inputText"
+        name="chatInput"
+        placeholder="Ask about medication, reminders, records…"
+        class="flex-1 rounded-2xl border border-slate-200 dark:border-slate-700
+               bg-slate-50 dark:bg-slate-800 px-3 py-2 text-xs
+               text-slate-900 dark:text-slate-100
+               focus:outline-none focus:ring-2 focus:ring-cyan-500"
+      />
+
+      <button
+        type="submit"
+        class="h-9 px-3 rounded-2xl bg-sky-600 text-white text-xs font-semibold
+               flex items-center justify-center gap-1
+               disabled:opacity-40 disabled:cursor-not-allowed
+               hover:bg-sky-700 active:scale-95 transition"
+        [disabled]="!inputText.trim() || isLoading"
+        aria-label="Send message"
+      >
+        ➤
+      </button>
+    </form>
+  </div>
+}

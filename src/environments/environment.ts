@@ -7,6 +7,6 @@ export const environment = {
     medicalRecords: '/medicalRecords',
     medications: '/medications',
     reminders: '/reminders',
-    chat: '/chat'
+    chat: '/message'
   }
 };
